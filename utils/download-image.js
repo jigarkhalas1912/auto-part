@@ -4,8 +4,10 @@ import { SIGNED_URL_CONTENT_TYPE } from "./constant.js";
 
 const downloadImage = async (url) => {
   const fileName = `${Date.now()}.jpeg`;
-
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    headless: true,
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+  });
   const page = await browser.newPage();
 
   await page.setUserAgent(
